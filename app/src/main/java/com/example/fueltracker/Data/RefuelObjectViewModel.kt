@@ -1,6 +1,7 @@
 package com.example.fueltracker.Data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class RefuelObjectViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<RefuelObject>>
+    val readAllData: LiveData<List<RefuelObject>>
     private val repository: RefuelObjectRepository
 
     init {
@@ -23,6 +24,7 @@ class RefuelObjectViewModel(application: Application) : AndroidViewModel(applica
 
     fun addRefuelObject(refuelObject: RefuelObject) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("Gleb","RefuelObjectViewModel ->addRefuelObject()")
             repository.addRefuelObject(refuelObject)
         }
     }

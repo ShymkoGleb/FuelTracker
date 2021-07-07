@@ -3,16 +3,19 @@ package com.example.fueltracker.UI
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.fueltracker.Data.RefuelObjectViewModel
+import com.example.fueltracker.Data.Room.RefuelObject
 import com.example.fueltracker.R
 import com.example.fueltracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var refuelObjectViewModel: RefuelObjectViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         //
         setupUi()
         setupListener()
-
-
     }
 
     private fun setupBinding() {
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupViewModel() {
-        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        refuelObjectViewModel = ViewModelProvider(this).get(RefuelObjectViewModel::class.java)
     }
 
     private fun setupListener() {
@@ -53,13 +54,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUi() {
-    binding.tvAvarageFuelAmount.text = viewModel.currentMile.toString()
+    //binding.tvAvarageFuelAmount.text = refuelObjectViewModel.currentMile.toString()
     }
 
 
     private fun getNewData() {
-        viewModel.currentMile = binding.etCurrentMiles.text.toString().toInt()
-        viewModel.fuelAmount = binding.etFuelAmount.text.toString().toInt()
+        val currentMiles = binding.etCurrentMiles.text.toString().toInt()
+        val fuelAmount = binding.etFuelAmount.text.toString().toInt()
+        val refuelObject = RefuelObject(0,currentMiles,fuelAmount)
+        Log.d("Gleb","RefuelObjectViewModel ->getNewData()" + refuelObject.toString())
+        refuelObjectViewModel.addRefuelObject(refuelObject)
     }
 
     private fun showToast(text: String) {
