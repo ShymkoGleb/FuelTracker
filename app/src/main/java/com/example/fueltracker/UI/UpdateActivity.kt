@@ -14,21 +14,21 @@ import com.example.fueltracker.Data.RefuelObjectViewModel
 import com.example.fueltracker.Data.Room.RefuelObject
 import com.example.fueltracker.R
 import com.example.fueltracker.databinding.ActivityMainBinding
+import com.example.fueltracker.databinding.ActivityUpdateBinding
 
-class MainActivity : AppCompatActivity() {
+class UpdateActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityUpdateBinding
     private lateinit var refuelObjectViewModel: RefuelObjectViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_update)
         setupBinding()
         setupViewModel()
         //
-        setupUi()
         setupListener()
-        setupAvarageGasMileage()
+        getIncomingIntent()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             showToast("DELETE" + R.id.menuDelete.toString())
             deleteAllUser()
         }
-        if(menyItemWasSelected == R.id.menuHello){
+        if (menyItemWasSelected == R.id.menuHello) {
             showToast("HELLO" + R.id.menuHello.javaClass.fields.toString())
         }
         return super.onOptionsItemSelected(item)
@@ -56,12 +56,9 @@ class MainActivity : AppCompatActivity() {
             .create().show()
     }
 
-    private fun setupAvarageGasMileage() {
-        binding.tvAvarageFuelAmount.text = refuelObjectViewModel.calcAvaregeFuel(this).toString()
-    }
 
     private fun setupBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityUpdateBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
     }
@@ -76,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             ListOfRefuelingActivity.start(this)
         }
 
-        binding.bntAddNewValue.setOnClickListener {
+        binding.bntUpdateValue.setOnClickListener {
             if (binding.etFuelAmount.text.isNotEmpty() && binding.etCurrentMiles.text.isNotEmpty()) {
                 getNewData()
                 showToast("Information is addet to database")
@@ -84,10 +81,10 @@ class MainActivity : AppCompatActivity() {
                 showToast("Fill the fields")
             }
         }
-    }
 
-    private fun setupUi() {
-        binding.tvAvarageFuelAmount.text = "refuelObjectViewModel."
+        binding.bntMainPage.setOnClickListener {
+            MainActivity.start(this)
+        }
     }
 
 
@@ -105,8 +102,19 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         fun start(context: Context) {
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, UpdateActivity::class.java)
             context.startActivity(intent)
         }
+    }
+
+    private fun getIncomingIntent() {
+        if (intent.hasExtra("refuelObject")) {
+            val refuelObject = intent.getParcelableExtra<RefuelObject>("refuelObject")
+            makeLog("refuelObject" + "${refuelObject.toString()}")
+        }
+    }
+
+    private fun makeLog(message: String) {
+        Log.d("Gleb", message)
     }
 }

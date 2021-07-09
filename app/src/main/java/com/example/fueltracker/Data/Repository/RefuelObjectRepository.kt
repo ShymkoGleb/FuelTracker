@@ -14,4 +14,14 @@ class RefuelObjectRepository(private val refuelObjectDao: RefuelObjectDao) {
         refuelObjectDao.addRefuelObject(refuelObject)
     }
 
+    suspend fun deleteRefuelObject(refuelObject: RefuelObject){
+        Log.d("Gleb","RefuelObjectRepository ->deleteUser()")
+        refuelObjectDao.deleteRefuelObject(refuelObject)
+    }
+
+    suspend fun deleteAllRefuelObjects(){
+        Log.d("Gleb","RefuelObjectRepository ->deleteAllRefuelObjects()")
+        refuelObjectDao.deleteAllRefuelObject()
+    }
+
 }

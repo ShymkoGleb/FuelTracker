@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:gravity="center_horizontal"
+	tools:context=".UI.UpdateActivity">
+
+
+	<EditText
+		android:id="@+id/etFuelAmount"
+		android:layout_marginTop="30dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:inputType="number"
+		android:hint="Amount of fuel (L)"/>
+
+	<EditText
+		android:id="@+id/etCurrentMiles"
+		android:layout_marginTop="30dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:inputType="number"
+		android:hint="Сurrent mileage (km)"/>
+
+	<Button
+		android:id="@+id/bntUpdateValue"
+		android:layout_marginTop="30dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Update Value"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"/>
+
+	<Button
+		android:id="@+id/bntMainPage"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="30dp"
+		android:layout_height="wrap_content"
+		android:text="List of Refueling"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"/>
+
+	<Button
+		android:id="@+id/bntListOfRefueling"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="30dp"
+		android:layout_height="wrap_content"
+		android:text="List of Refueling"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"/>
+
+</LinearLayout>

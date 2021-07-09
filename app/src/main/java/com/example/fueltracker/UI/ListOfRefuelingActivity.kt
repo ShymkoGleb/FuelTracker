@@ -29,6 +29,7 @@ class ListOfRefuelingActivity : AppCompatActivity() {
         refuelObjectViewModel.readAllData.observe(this, Observer { refuelObject ->
             Log.d("Gleb", refuelObject.toString())
             adapter.setData(refuelObject)
+
         })
     }
 
@@ -37,10 +38,11 @@ class ListOfRefuelingActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerViewAdapter(): ListOfRefuelAdaptor {
-        val adaptor = ListOfRefuelAdaptor()
+        val adaptor = ListOfRefuelAdaptor(this)
         val recyclerView = binding.rvListOfRefueling
         recyclerView.adapter = adaptor
         recyclerView.layoutManager = LinearLayoutManager(this)
+
         return adaptor
     }
 
